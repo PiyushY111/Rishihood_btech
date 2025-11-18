@@ -3250,10 +3250,11 @@ body {
 
 @media (min-width: 1024px) {
   .hero-section {
-        background: url('./assets/hero1.jpg');
-        background-size: 100% auto;
+        /* background: url('./assets/hero1.jpg'); */
+        background-image: url('./assets/hero1.jpg');
+        /* background-size: 100% auto; */
         background-position: center;
-        height: 85vh;
+        height: 99vh;
         justify-content: center;
         /* padding: 64px 24px; */
     }
