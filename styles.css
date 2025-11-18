@@ -500,7 +500,8 @@ body {
 
 @media (min-width: 768px) {
   .curriculum-course-item {
-    font-size: 10px;
+    font-size: 12px;
+    font-weight: 500;
   }
 }
 
@@ -604,7 +605,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  /* text-align: center; */
   background: #fffaf8;
   padding: 2rem;
   border-radius: 1rem;
@@ -617,7 +618,7 @@ body {
 }
 
 .curriculum-internship-title {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #0f172a;
   margin-top: 0.25rem;
@@ -625,7 +626,7 @@ body {
 
 @media (min-width: 768px) {
   .curriculum-internship-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -2607,6 +2608,10 @@ body {
   padding: 0 40px;
 }
 
+.startup-section-title{
+  margin-bottom: 2.5rem;
+}
+
 .startup-card {
   background: #fff;
   border-radius: 16px;
@@ -3145,6 +3150,8 @@ body {
     line-height: 1;
     margin-bottom: 16px;
     padding-left: 5px;
+    border-bottom: 2px solid #CC0033;
+    max-width: fit-content;
 }
 
 .hero-subtext-wrapper {
@@ -3156,9 +3163,9 @@ body {
     color: #CC0033;
     font-size: 16px;
     font-weight: bold;
-    border-top: 2px solid #CC0033;
+    /* border-top: 2px solid #CC0033; */
     padding-top: 12px;
-    max-width: 400px;
+    /* max-width: 400px; */
     line-height: 1.4;
 }
 
