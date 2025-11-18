@@ -3183,7 +3183,7 @@ body {
 /* ========== HERO SECTION ========== */
 .hero-section {
   margin-top: 70px;
-  background: url("./assets/hero.jpg");
+  background: url("./assets/hero-phone.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3334,7 +3334,7 @@ body {
 
 @media (min-width: 1024px) {
   .hero-section {
-    background: url("./assets/hero1.jpg");
+    background: url("./assets/hero.webp");
     background-size: 100% auto;
     background-position: center;
     height: 99vh;
