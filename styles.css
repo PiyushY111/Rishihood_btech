@@ -195,7 +195,7 @@ body {
 /* Stats Grid */
 .program-stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -349,16 +349,16 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #cc0033 #f3f4f6;
   }
-  
+
   .curriculum-tabs-container::-webkit-scrollbar {
     height: 6px;
   }
-  
+
   .curriculum-tabs-container::-webkit-scrollbar-track {
     background: #f3f4f6;
     border-radius: 10px;
   }
-  
+
   .curriculum-tabs-container::-webkit-scrollbar-thumb {
     background: #cc0033;
     border-radius: 10px;
@@ -2909,6 +2909,17 @@ body {
   line-height: 1.5;
 }
 
+@media (max-width: 768px) {
+  .foundation-description {
+    font-size: 14px;
+    color: #000000;
+    padding: 16px;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.5;
+  }
+}
+
 .minors-section {
   display: flex;
   /* flex-direction: column; */
@@ -2962,10 +2973,42 @@ body {
   text-align: left;
   line-height: 1.5;
 }
-/*                        --------                TO DO                           ------------ */
 @media (max-width: 768px) {
   .minors-section {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .minor-card {
+    flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .minor-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  .minor-title {
+    font-size: 18px;
+    margin-bottom: 0;
+    flex: 1;
+    min-width: calc(100% - 56px);
+  }
+
+  .minor-description {
+    font-size: 14px;
+    margin-bottom: 0;
+    width: 100%;
+    margin-left: 56px;
+    margin-top: 0px;
   }
 }
 
@@ -3042,9 +3085,10 @@ body {
 .feature-card {
   background: white;
   backdrop-filter: blur(10px);
-  border-radius: 16px;
+  border-radius: 5px;
   padding: 32px 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid red;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -3149,8 +3193,8 @@ body {
   }
 
   .professor-info {
-    left: 15px;
-    top: 20px;
+    left: 145px;
+    top: 0px;
     max-width: calc(100% - 30px);
     padding: 14px 16px;
     /* background: rgba(255, 255, 255, 0.92); */
@@ -3217,10 +3261,9 @@ body {
     justify-content: flex-start;
     font-size: 1rem !important;
   }
-  .hero-heading{
+  .hero-heading {
     font-size: 1.75rem !important;
   }
-
 }
 
 .hero-heading {
@@ -3274,6 +3317,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
+  height: 25vh;
   z-index: 10;
 }
 
@@ -3282,54 +3326,66 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  height: 100%;
   z-index: 0;
 }
 
 .hero-bg-shape img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
 }
 
 .hero-info-content {
   position: relative;
   z-index: 10;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  padding: 24px 16px 16px 16px;
+  align-items: center;
+  padding: 16px;
 }
 
 .hero-info-cards {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 4px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 900px;
 }
 
 .hero-info-card {
   text-align: center;
   color: white;
-  padding: 8px;
-  min-width: 120px;
+  padding: 12px 8px;
+  min-width: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 150px;
 }
 
 .hero-info-icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   margin: 0 auto 8px auto;
 }
 
 .hero-info-label {
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .hero-info-value {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 @media (min-width: 1024px) {
@@ -3372,26 +3428,38 @@ body {
     font-size: 16px;
   }
 
+  .hero-bottom-info {
+    height: 30vh;
+  }
+
   .hero-info-content {
-    justify-content: flex-end;
-    padding: 0 160px 24px 0;
+    justify-content: center;
+    padding: 0 40px;
+  }
+
+  .hero-info-cards {
+    gap: 20px;
+    max-width: 1000px;
   }
 
   .hero-info-card {
-    min-width: 180px;
-    padding: 12px 24px;
+    min-width: 200px;
+    max-width: 250px;
+    padding: 20px 16px;
   }
 
   .hero-info-icon {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 12px auto;
   }
 
   .hero-info-label {
-    font-size: 13px;
+    font-size: 16px;
+    margin-bottom: 6px;
   }
 
   .hero-info-value {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
