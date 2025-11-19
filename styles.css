@@ -2685,7 +2685,7 @@ body {
   overflow: hidden;
   min-width: 260px;
   width: 260px;
-  height: 360px;
+  height: 400px;
   cursor: pointer;
   transition: all 0.4s ease;
   display: flex;
@@ -2699,13 +2699,13 @@ body {
 .startup-card.active {
   width: auto;
   max-width: 700px;
-  height: 360px;
+  height: 420px;
 }
 
 .startup-card img {
   width: 260px;
   min-width: 260px;
-  height: 370px;
+  height: 420px;
   object-fit: cover;
   object-position: bottom;
   transition: all 0.3s ease;
