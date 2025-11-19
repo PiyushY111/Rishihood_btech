@@ -136,7 +136,7 @@ body {
 
 @media (min-width: 768px) {
   .program-experience-section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
   }
 }
 
@@ -167,30 +167,28 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
   background-color: #ffffff;
-  border-radius: 1rem;
 }
 
 .program-hours-badge {
   background: linear-gradient(
     135deg,
-    rgba(204, 0, 51, 0.2) 0%,
-    rgba(204, 0, 51, 0.15) 100%
+    rgba(204, 0, 51, 0.15) 0%,
+    rgba(204, 0, 51, 0.08) 100%
   );
   color: #cc0033;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   border-radius: 0.5rem;
-  padding: 0.75rem 2.5rem;
+  padding: 0.25rem 1rem;
   display: inline-block;
-  box-shadow: 0 4px 12px rgba(204, 0, 51, 0.15);
+  box-shadow: 0 2px 8px rgba(204, 0, 51, 0.1);
 }
 
 @media (min-width: 768px) {
   .program-hours-badge {
-    font-size: 1.5rem;
-    padding: 0.25rem 3rem;
+    font-size: 1.125rem;
   }
 }
 
@@ -240,7 +238,7 @@ body {
 
 @media (min-width: 768px) {
   .program-stat-card {
-    padding: 2.5rem 0rem;
+    padding: 2.5rem 2rem;
     max-height: 140px;
   }
 }
@@ -327,7 +325,7 @@ body {
 
 @media (min-width: 768px) {
   .curriculum-main-title {
-    font-size: 3rem;
+    font-size: 28px;
   }
 }
 
@@ -469,7 +467,7 @@ body {
 @media (min-width: 768px) {
   .curriculum-content-box {
     padding: 4rem 3rem;
-    min-height: auto;
+    min-height: 480px;
   }
 }
 
@@ -719,7 +717,7 @@ body {
 
 .faculty-title {
   color: #cc0033;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   text-align: center;
   padding: 0 16px;
@@ -965,7 +963,7 @@ body {
   }
 
   .faculty-title {
-    font-size: 28px             ;
+    font-size: 28px;
   }
 
   .faculty-tabs {
@@ -2640,13 +2638,13 @@ body {
 }
 
 .trek-description {
-  font-size: 20px;
+  font-size: 14px;
   color: #000000;
   line-height: 1;
   text-align: center;
   padding-top: 24px;
   margin-bottom: 24px;
-  max-width: 50%;
+  max-width: 800px;
 }
 
 .trek-image {
@@ -3042,42 +3040,44 @@ body {
 
 /* ========== WHY CHOOSE BBA IN ENTREPRENEURSHIP SECTION ========== */
 .why-choose-section {
-  padding: 80px 20px 120px 20px;
-  background: url("./assets/why-bg.png") center/cover no-repeat;
+  /* padding: 80px 20px 120px 20px; */
+  /* background: url("./assets/why-bg.png") center/cover no-repeat; */
   position: relative;
 }
 
 .why-choose-wrapper {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
 }
 
-/* .why-choose-content {
-    margin-top: 60px;
-} */
+.why-choose-content {
+  background: url("./assets/why-bg.png") center/cover no-repeat;
+    /* margin-top: 60px; */
+}
 
 .professor-section {
   position: relative;
   /* margin-bottom: 60px; */
   min-height: 500px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .professor-section img {
   width: 100%;
   max-width: 1200px;
-  height: 500px;
+  /* height: 500px; */
   object-fit: cover;
   border-radius: 20px;
   /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); */
+  z-index: 1;
 }
 
 .professor-info {
   position: absolute;
-  left: 80px;
-  top: 60px;
+  left: 15%;
+  top: 25%;
   z-index: 0;
   padding: 20px;
   border-radius: 12px;
@@ -3099,12 +3099,12 @@ body {
 
 .feature-cards-grid {
   position: absolute;
-  bottom: 0px;
+  bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(4, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 26px;
   width: 90%;
   max-width: 1100px;
   z-index: 2;
@@ -3116,7 +3116,7 @@ body {
   /* border-radius: 1rem; */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  padding: 32px 24px;
+  padding: 16px 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   /* border-bottom: 2px solid red; */
   transition: all 0.3s ease;
@@ -3127,9 +3127,9 @@ body {
 
 .feature-title {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: #cc0033;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   line-height: 1.3;
   text-align: center;
   text-decoration: underline;
@@ -3157,9 +3157,9 @@ body {
 }
 
 @media (max-width: 768px) {
-  .why-choose-section {
+  /* .why-choose-section {
     padding: 60px 15px 80px 15px;
-  }
+  } */
 
   .professor-section {
     min-height: 350px;
@@ -3209,9 +3209,9 @@ body {
 }
 
 @media (max-width: 480px) {
-  .why-choose-section {
+  /* .why-choose-section {
     padding: 40px 15px 60px 15px;
-  }
+  } */
 
   .professor-section {
     min-height: 280px;
