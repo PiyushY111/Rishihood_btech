@@ -1029,24 +1029,80 @@ document.addEventListener("DOMContentLoaded", function () {
     lastScrollTop = scrollTop;
   });
 
-  // ============= FADE IN ANIMATION ON SCROLL (OPTIONAL) ===============
+  // ============= MINIMAL SCROLL REVEAL ANIMATION ===============
+  // Uses IntersectionObserver to add .in-view to .animate-section elements
+  // ensuring subtle fade+lift on first reveal only.
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          obs.unobserve(entry.target); // reveal once
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -40px 0px",
+    }
+  );
 
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
+  document.querySelectorAll(".animate-section").forEach((el) => {
+    revealObserver.observe(el);
+  });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("fade-in");
-      }
-    });
-  }, observerOptions);
+  // ============= COMPONENT-LEVEL REVEAL ITEMS =============
+  const componentSelectors = [
+    ".foundation-card",
+    ".minor-card",
+    ".professor-info",
+    ".feature-card",
+    ".startup-card",
+    ".trek-image",
+    ".testimonial-card",
+    ".program-stat-card",
+    ".senior-photo",
+    ".company-logo-card",
+    ".experience-title",
+    ".video-card",
+    ".curriculum-content-box",
+    ".faculty-card",
+    ".partner-card",
+    ".advantage-card",
+    ".exposure-card",
+    ".admission-image",
+    ".faq-item"
+  ];
 
-  // Observe all sections for fade-in animation
-  document.querySelectorAll("section").forEach((section) => {
-    observer.observe(section);
+  const componentElements = componentSelectors.flatMap(sel => Array.from(document.querySelectorAll(sel)));
+
+  // Add reveal-item class to each component (skip if inside hero-section to honor 'no hero animation')
+  componentElements.forEach((el, idx) => {
+    if (el.closest('.hero-section')) return; // skip hero content
+    el.classList.add('reveal-item');
+  });
+
+  const itemObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.reveal-item').forEach((el, i) => {
+    // Optional lightweight stagger limited to first 6 items per section
+    const parentSection = el.closest('section');
+    if (parentSection) {
+      const siblings = Array.from(parentSection.querySelectorAll('.reveal-item'));
+      const localIndex = siblings.indexOf(el);
+      el.style.transitionDelay = Math.min(localIndex, 5) * 60 + 'ms';
+    }
+    itemObserver.observe(el);
   });
 
   console.log("Rishihood B.Design website loaded successfully!");
