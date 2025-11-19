@@ -3111,10 +3111,12 @@ body {
 .feature-card {
   background: white;
   backdrop-filter: blur(10px);
-  border-radius: 5px;
+  /* border-radius: 1rem; */
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
   padding: 32px 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border-bottom: 2px solid red;
+  /* border-bottom: 2px solid red; */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -3278,6 +3280,12 @@ body {
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    background-image: url("./assets/hero.webp");
+    background-size: contain; /* ensure full image is visible */
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
   .hero-content {
     justify-content: flex-start;
   }
@@ -3299,20 +3307,21 @@ body {
   line-height: 1;
   margin-bottom: 16px;
   padding-left: 5px;
+  border-bottom: 2px solid #cc0033;
+  width: fit-content;
 }
 
 .hero-subtext-wrapper {
   padding-left: 10px;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 }
 
 .hero-subtext {
   color: #cc0033;
   font-size: 16px;
   font-weight: bold;
-  border-top: 2px solid #cc0033;
   padding-top: 12px;
-  max-width: 400px;
+  /* max-width: 400px; */
   line-height: 1.4;
 }
 
@@ -3376,7 +3385,7 @@ body {
 
 .hero-info-cards {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
   width: 100%;
@@ -3442,26 +3451,26 @@ body {
 
   .hero-subtext {
     font-size: 20px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     padding-top: 16px;
   }
 
-  .hero-button-wrapper {
+  /* .hero-button-wrapper {
     padding: 0 32px;
-  }
+  } */
 
   .hero-button {
     width: 220px;
     font-size: 16px;
   }
 
-  .hero-bottom-info {
+  /* .hero-bottom-info {
     height: 30vh;
-  }
+  } */
 
   .hero-info-content {
     justify-content: flex-end;
-    padding: 0 120px 0 60px;
+    /* padding: 0 120px 0 60px; */
   }
 
   .hero-info-cards {
