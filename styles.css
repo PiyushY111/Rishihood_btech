@@ -3058,7 +3058,7 @@ body {
 .professor-section {
   position: relative;
   /* margin-bottom: 60px; */
-  min-height: 500px;
+  min-height: 100vh;
   /* display: flex;
   justify-content: center;
   align-items: center; */
