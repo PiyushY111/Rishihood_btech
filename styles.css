@@ -136,7 +136,7 @@ body {
 
 @media (min-width: 768px) {
   .program-experience-section {
-    padding: 5rem 2rem;
+    padding: 4rem 2rem;
   }
 }
 
@@ -167,28 +167,30 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   background-color: #ffffff;
+  border-radius: 1rem;
 }
 
 .program-hours-badge {
   background: linear-gradient(
     135deg,
-    rgba(204, 0, 51, 0.15) 0%,
-    rgba(204, 0, 51, 0.08) 100%
+    rgba(204, 0, 51, 0.2) 0%,
+    rgba(204, 0, 51, 0.15) 100%
   );
   color: #cc0033;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   border-radius: 0.5rem;
-  padding: 0.25rem 1rem;
+  padding: 0.75rem 2.5rem;
   display: inline-block;
-  box-shadow: 0 2px 8px rgba(204, 0, 51, 0.1);
+  box-shadow: 0 4px 12px rgba(204, 0, 51, 0.15);
 }
 
 @media (min-width: 768px) {
   .program-hours-badge {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
+    padding: 0.25rem 3rem;
   }
 }
 
@@ -238,7 +240,7 @@ body {
 
 @media (min-width: 768px) {
   .program-stat-card {
-    padding: 2.5rem 2rem;
+    padding: 2.5rem 0rem;
     max-height: 140px;
   }
 }
@@ -325,7 +327,7 @@ body {
 
 @media (min-width: 768px) {
   .curriculum-main-title {
-    font-size: 28px;
+    font-size: 3rem;
   }
 }
 
@@ -467,7 +469,7 @@ body {
 @media (min-width: 768px) {
   .curriculum-content-box {
     padding: 4rem 3rem;
-    min-height: 480px;
+    min-height: auto;
   }
 }
 
@@ -717,7 +719,7 @@ body {
 
 .faculty-title {
   color: #cc0033;
-  font-size: 40px;
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
   padding: 0 16px;
@@ -963,7 +965,7 @@ body {
   }
 
   .faculty-title {
-    font-size: 28px;
+    font-size: 28px             ;
   }
 
   .faculty-tabs {
@@ -2638,13 +2640,13 @@ body {
 }
 
 .trek-description {
-  font-size: 14px;
+  font-size: 20px;
   color: #000000;
   line-height: 1;
   text-align: center;
   padding-top: 24px;
   margin-bottom: 24px;
-  max-width: 800px;
+  max-width: 50%;
 }
 
 .trek-image {
