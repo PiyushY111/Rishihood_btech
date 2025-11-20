@@ -3263,9 +3263,9 @@ body {
 /* ========== HERO SECTION ========== */
 .hero-section {
   margin-top: 62px;
-  background: url("./assets/hero-phone.webp");
+  background: url("./assets/hero.png");
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
   background-repeat: no-repeat;
   min-height: 99vh;
   display: flex;
@@ -3289,7 +3289,7 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    background-image: url("./assets/hero.webp");
+    background-image: url("./assets/hero.png");
     background-size: contain; /* ensure full image is visible */
     background-position: top center;
     background-repeat: no-repeat;
@@ -3433,9 +3433,10 @@ body {
 
 @media (min-width: 1024px) {
   .hero-section {
-    background: url("./assets/hero.webp");
-    background-size: 100% auto;
-    background-position: center;
+    background: url("./assets/hero.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     height: 99vh;
     justify-content: center;
 
