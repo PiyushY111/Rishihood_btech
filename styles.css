@@ -3184,7 +3184,7 @@ body {
 }
 
 .why-choose-content {
-  background: url("./assets/why-bg.png") center/cover no-repeat ;
+  background: url("./assets/why-bg.webp") center/cover no-repeat ;
     /* margin-top: 60px; */
 }
 
@@ -3412,7 +3412,7 @@ body {
 /* ========== HERO SECTION ========== */
 .hero-section {
   margin-top: 62px;
-  background: url("./assets/hero.png");
+  background: url("./assets/hero.webp");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -3438,7 +3438,7 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    background-image: url("./assets/hero-phone.png");
+    background-image: url("./assets/hero-phone.webp");
     /* background-size: contain; ensure full image is visible */
     background-position: top center;
     background-repeat: no-repeat;
@@ -3451,7 +3451,6 @@ body {
 @media (max-width: 480px) {
   .hero-content {
     background-position: bottom center;
-    /* background-image: url("./assets/hero-phone.png"); */
     justify-content: flex-start;
     
     font-size: 1rem !important;
@@ -3588,7 +3587,7 @@ body {
 
 @media (min-width: 1024px) {
   .hero-section {
-    background: url("./assets/hero.png");
+    background: url("./assets/hero.webp");
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
