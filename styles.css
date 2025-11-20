@@ -19,6 +19,18 @@ html {
   zoom: 0.94;
 }
 
+@media (max-width: 768px) {
+  html {
+    zoom: 0.85;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    zoom: 0.80;
+  }
+}
+
 html,
 body {
   font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto,
@@ -31,8 +43,8 @@ body {
 /* ========== SCROLL REVEAL ANIMATIONS ========== */
 .animate-section {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .animate-section.in-view {
@@ -42,13 +54,55 @@ body {
 
 .reveal-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .reveal-item.in-view {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered animation delays for text elements */
+.animate-section .section-title,
+.animate-section h1,
+.animate-section h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition-delay: 0.2s;
+}
+
+.animate-section.in-view .section-title,
+.animate-section.in-view h1,
+.animate-section.in-view h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-section p,
+.animate-section .description {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+  transition-delay: 0.4s;
+}
+
+.animate-section.in-view p,
+.animate-section.in-view .description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Exclude hero section from slow animations */
+.hero-section .section-title,
+.hero-section h1,
+.hero-section h2,
+.hero-section p {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  transition-delay: 0s;
 }
 
 /* Container */
@@ -330,7 +384,7 @@ body {
 
 @media (min-width: 1024px) {
   .curriculum-section {
-    padding: 3rem 4rem 3rem;
+    padding: 1.5rem 4rem 0.5rem;
   }
 }
 
@@ -348,12 +402,13 @@ body {
 
 @media (min-width: 768px) {
   .curriculum-main-title {
-    font-size: 28px;
+    font-size: 3rem;
   }
 }
 
 .curriculum-content-container {
-  min-height: 60vh;
+  min-height: auto;
+  padding-bottom: 1rem;
 }
 
 .curriculum-inner-wrapper {
@@ -371,7 +426,6 @@ body {
   flex-wrap: nowrap;
   justify-content: flex-start;
   gap: 0.5rem;
-  margin-top: 1.25rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   overflow-x: auto;
   overflow-y: hidden;
@@ -733,7 +787,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 80vh;
-  padding: 32px 48px;
+  padding: 24px 48px;
   background-color: #faf8f4;
   overflow-x: hidden;
 }
@@ -981,7 +1035,7 @@ body {
 /* Mobile Styles - Faculty */
 @media (max-width: 767px) {
   .faculty-section {
-    padding: 32px 16px;
+    padding: 0px 16px;
     min-height: 70vh;
   }
 
@@ -1108,7 +1162,6 @@ body {
   align-items: center;
   padding: 30px 24px;
   background-color: white;
-  padding-bottom: 0px;
 }
 
 .partners-title {
@@ -1129,7 +1182,7 @@ body {
 .partners-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #374151;
+  color: black;
   max-width: 900px;
   margin-bottom: 50px;
   line-height: 1.6;
@@ -1214,6 +1267,7 @@ body {
   padding-top: 2rem;
   padding-bottom: 2rem;
   margin-bottom: 2rem;
+  background: #FAF8F4;
 }
 
 @media (min-width: 768px) {
@@ -1236,7 +1290,7 @@ body {
 @media (min-width: 768px) {
   .advantage-title {
     font-size: 48px;
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
   }
 }
 
@@ -1333,7 +1387,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #faf8f4;
+  background-color: white;
   padding: 16px;
 }
 
@@ -2050,7 +2104,7 @@ body {
 /* Experience Life Section */
 .experience-life-section {
   padding: 20px 0;
-  background: white;
+  background: #FAF8F4;
   display: flex;
   align-items: center;
 }
@@ -2240,7 +2294,7 @@ body {
 /* Seniors Working Section */
 .seniors-working-section {
   padding: 24px 20px;
-  background: #faf8f4;
+  background: white;
 }
 
 .seniors-photos {
@@ -2710,7 +2764,7 @@ body {
 /* Student Startups Section */
 .student-startups-section {
   padding: 20px 0;
-  background: #faf8f4;
+  background: white;
   width: 100%;
 }
 
@@ -3064,7 +3118,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
     padding: 16px;
     position: sticky;
     top: 80px;
@@ -3096,22 +3150,24 @@ body {
     width: 40px;
     height: 40px;
     font-size: 16px;
-    margin-top: 4px;
+    margin-top: 0px;
   }
 
   .minor-title {
     font-size: 18px;
     margin-bottom: 0;
     flex: 1;
-    min-width: calc(100% - 56px);
+    min-width: auto;
+    margin-top: 8px;
   }
 
   .minor-description {
     font-size: 14px;
     margin-bottom: 0;
     width: 100%;
-    margin-left: 56px;
-    margin-top: 0px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-left: 48px;
   }
 }
 
@@ -3324,7 +3380,7 @@ body {
   .professor-info {
         position: absolute;
         z-index: 999;
-        left: 177px;
+        left: 224px;
         top: 0px;
         max-width: calc(100% - 30px);
         padding: 14px 16px;
@@ -3401,7 +3457,8 @@ body {
     font-size: 1rem !important;
   }
   .hero-heading {
-    font-size: 1.75rem !important;
+    font-size: 2.5rem !important;
+    padding-bottom: 0.7rem;
   }
 }
 
@@ -3423,7 +3480,7 @@ body {
 
 .hero-subtext {
   color: #cc0033;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   padding-top: 12px;
   /* max-width: 400px; */
@@ -3549,7 +3606,7 @@ body {
 
   .hero-heading {
     font-size: 56px;
-    /* padding: 0 64px; */
+    padding-bottom: 12px;
   }
 
   /* .hero-subtext-wrapper {
