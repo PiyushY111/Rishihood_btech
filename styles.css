@@ -28,6 +28,29 @@ body {
   color: #333;
 }
 
+/* ========== SCROLL REVEAL ANIMATIONS ========== */
+.animate-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Container */
 .container {
   max-width: 1400px;
@@ -2458,37 +2481,42 @@ body {
 @media (max-width: 768px) {
   /* Mobile Testimonials Section */
   .student-testimonials-section {
-    padding: 60px 20px;
+    padding: 40px 0;
+    overflow: hidden;
   }
 
-  .testimonials-container {
-    /* flex-direction: column; */
-    gap: 24px;
-    overflow-x: visible;
-    padding: 20px 0;
+  .student-testimonials-section .container {
+    padding: 0;
   }
 
-  /* Mobile: compact, horizontally scrollable testimonials with snap */
+  .student-testimonials-section .section-title {
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+
   .testimonials-container {
     flex-wrap: nowrap;
     display: flex;
-    gap: 12px;
+    gap: 20px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 10px 12px;
+    padding: 10px 20px 20px 20px;
     justify-content: flex-start;
+    margin: 0;
   }
 
   .testimonial-card {
-    flex: 0 0 70%;
-    max-width: 70%;
+    flex: 0 0 calc(100% - 40px);
+    min-width: calc(100% - 40px);
+    max-width: calc(100% - 40px);
     scroll-snap-align: center;
-    height: 140px;
-    flex-direction: row;
-    border-radius: 12px;
+    height: auto;
+    min-height: auto;
+    flex-direction: column;
+    border-radius: 16px;
     background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex !important;
     cursor: grab;
     pointer-events: auto;
@@ -2497,99 +2525,110 @@ body {
   }
 
   .testimonial-card.active {
-    min-width: 70%;
-    width: 70%;
-    height: 140px;
+    min-width: calc(100% - 40px);
+    width: calc(100% - 40px);
+    height: auto;
   }
 
   .testimonial-card img {
-    width: 36%;
-    min-width: 36%;
-    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    height: 250px;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     background: #ffedd2;
     border-radius: 0;
   }
 
   .testimonial-card .testimonial-content {
-    width: 64% !important;
+    width: 100% !important;
     opacity: 1 !important;
-    padding: 12px 12px;
+    padding: 20px 20px;
     display: flex !important;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: visible !important;
   }
 
   .testimonial-card.active .testimonial-content {
-    width: 64% !important;
+    width: 100% !important;
     opacity: 1 !important;
   }
 
   .testimonial-card .quote-icon {
-    font-size: 36px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     line-height: 1;
     display: block !important;
     opacity: 1 !important;
   }
 
+  .testimonial-card .quote-icon svg {
+    width: 40px;
+    height: 30px;
+  }
+
   .testimonial-card .testimonial-text {
-    font-size: 13px;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
     display: block !important;
     opacity: 1 !important;
+    color: #333;
   }
 
   .testimonial-card .testimonial-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     display: block !important;
     opacity: 1 !important;
+    color: #1a1a1a;
   }
 }
 
 @media (max-width: 480px) {
   /* Small Mobile Testimonials */
   .student-testimonials-section {
-    padding: 40px 16px;
+    padding: 40px 0;
+  }
+
+  .student-testimonials-section .section-title {
+    padding: 0 16px;
   }
 
   .testimonials-container {
-    gap: 20px;
+    gap: 6px;
+    padding: 10px 0px;
   }
 
   .testimonial-card {
-    min-width: 100%;
-    width: 100%;
+    flex: 0 0 90%;
+    min-width: 90%;
+    max-width: 90%;
     flex-direction: row;
     display: flex !important;
-    cursor: default;
-    pointer-events: auto; /* allow swipe */
+    cursor: grab;
+    pointer-events: auto;
     height: auto;
+    min-height: 180px;
   }
 
   .testimonial-card.active {
-    min-width: 100%;
-    width: 100%;
+    min-width: 90%;
+    width: 90%;
     height: auto;
   }
 
   .testimonial-card img {
     width: 40%;
     min-width: 40%;
-    max-width: 250px;
-    height: auto;
-    border-radius: 16px 0 0 0;
+    height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
   }
 
   .testimonial-card .testimonial-content {
     width: 60% !important;
-    padding: 20px 16px;
+    padding: 16px 12px;
     opacity: 1 !important;
     overflow: visible !important;
     display: flex !important;
@@ -2600,9 +2639,13 @@ body {
     opacity: 1 !important;
   }
 
+  .testimonial-card .quote-icon svg {
+    width: 28px;
+    height: 22px;
+  }
+
   .testimonial-card .quote-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block !important;
     opacity: 1 !important;
   }
@@ -2613,15 +2656,19 @@ body {
   }
 
   .testimonial-card .testimonial-text {
-    font-size: 13px;
+    font-size: 11px;
     line-height: 1.5;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     display: block !important;
     opacity: 1 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .testimonial-card .testimonial-name {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     display: block !important;
     opacity: 1 !important;
@@ -2898,7 +2945,7 @@ body {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  padding: 32px 48px;
+  padding: 32px 12px;
 }
 
 .foundation-wrapper {
@@ -3010,14 +3057,38 @@ body {
     flex-direction: column;
     gap: 16px;
     padding: 0 16px;
+    position: relative;
   }
 
   .minor-card {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 16px;
+    gap: 10px;
     padding: 16px;
+    position: sticky;
+    top: 80px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .minor-card:nth-child(1) {
+    top: 80px;
+  }
+
+  .minor-card:nth-child(2) {
+    top: 100px;
+  }
+
+  .minor-card:nth-child(3) {
+    top: 120px;
+  }
+
+  .minor-card:nth-child(4) {
+    top: 140px;
+  }
+
+  .minor-card:nth-child(5) {
+    top: 160px;
   }
 
   .minor-number {
@@ -3199,10 +3270,32 @@ body {
     gap: 20px;
     width: 100%;
     margin-top: 40px;
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: column;
   }
 
   .feature-card {
     padding: 24px 20px;
+    position: sticky;
+    top: 80px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .feature-card:nth-child(1) {
+    top: 80px;
+  }
+
+  .feature-card:nth-child(2) {
+    top: 100px;
+  }
+
+  .feature-card:nth-child(3) {
+    top: 120px;
+  }
+
+  .feature-card:nth-child(4) {
+    top: 140px;
   }
 
   .feature-title {
@@ -3229,12 +3322,12 @@ body {
   }
 
   .professor-info {
-    left: 145px;
-    top: 0px;
-    max-width: calc(100% - 30px);
-    padding: 14px 16px;
-    /* background: rgba(255, 255, 255, 0.92); */
-    backdrop-filter: blur(4px);
+        position: absolute;
+        z-index: 999;
+        left: 177px;
+        top: 0px;
+        max-width: calc(100% - 30px);
+        padding: 14px 16px;
   }
 
   .professor-name {
@@ -3289,10 +3382,11 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    background-image: url("./assets/hero.png");
-    background-size: contain; /* ensure full image is visible */
+    background-image: url("./assets/hero-phone.png");
+    /* background-size: contain; ensure full image is visible */
     background-position: top center;
     background-repeat: no-repeat;
+    /* background-size: auto; */
   }
   .hero-content {
     justify-content: flex-start;
@@ -3300,7 +3394,10 @@ body {
 }
 @media (max-width: 480px) {
   .hero-content {
+    background-position: bottom center;
+    /* background-image: url("./assets/hero-phone.png"); */
     justify-content: flex-start;
+    
     font-size: 1rem !important;
   }
   .hero-heading {
@@ -3334,6 +3431,7 @@ body {
 }
 
 .hero-button-wrapper {
+  margin-top: 1rem;
   padding: 0 8px;
 }
 

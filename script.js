@@ -336,6 +336,127 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize
     initTestimonialMode();
   }
+
+  // ============= AUTO-SCROLL FOR MOBILE SECTIONS =============
+  // Auto-scroll for Testimonials on mobile
+  const testimonialsAutoScroll = () => {
+    if (window.innerWidth <= 768 && testimonialsContainer) {
+      const cardWidth = testimonialsContainer.scrollWidth / testimonialCards.length;
+      const currentScroll = testimonialsContainer.scrollLeft;
+      const maxScroll = testimonialsContainer.scrollWidth - testimonialsContainer.clientWidth;
+      
+      if (currentScroll >= maxScroll - 10) {
+        // At the end, jump to start
+        testimonialsContainer.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll to next card
+        testimonialsContainer.scrollBy({
+          left: cardWidth,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  // Auto-scroll for Student Startups on mobile
+  const startupsContainer = document.querySelector('.startups-container');
+  const startupsAutoScroll = () => {
+    if (window.innerWidth <= 768 && startupsContainer && startupCards.length > 0) {
+      const cardWidth = startupsContainer.scrollWidth / startupCards.length;
+      const currentScroll = startupsContainer.scrollLeft;
+      const maxScroll = startupsContainer.scrollWidth - startupsContainer.clientWidth;
+      
+      if (currentScroll >= maxScroll - 10) {
+        // At the end, jump to start
+        startupsContainer.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll to next card
+        startupsContainer.scrollBy({
+          left: cardWidth,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  // Start auto-scroll intervals
+  let testimonialsInterval = null;
+  let startupsInterval = null;
+
+  const startAutoScroll = () => {
+    if (window.innerWidth <= 768) {
+      // Start testimonials auto-scroll
+      if (testimonialsContainer && !testimonialsInterval) {
+        testimonialsInterval = setInterval(testimonialsAutoScroll, 2000);
+      }
+      
+      // Start startups auto-scroll
+      if (startupsContainer && !startupsInterval) {
+        startupsInterval = setInterval(startupsAutoScroll, 2000);
+      }
+    }
+  };
+
+  const stopAutoScroll = () => {
+    if (testimonialsInterval) {
+      clearInterval(testimonialsInterval);
+      testimonialsInterval = null;
+    }
+    if (startupsInterval) {
+      clearInterval(startupsInterval);
+      startupsInterval = null;
+    }
+  };
+
+  // Initialize auto-scroll
+  startAutoScroll();
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    stopAutoScroll();
+    setTimeout(startAutoScroll, 300);
+  });
+
+  // Pause auto-scroll when user interacts
+  if (testimonialsContainer) {
+    testimonialsContainer.addEventListener('touchstart', () => {
+      if (testimonialsInterval) {
+        clearInterval(testimonialsInterval);
+        testimonialsInterval = null;
+      }
+    });
+    
+    testimonialsContainer.addEventListener('touchend', () => {
+      setTimeout(() => {
+        if (window.innerWidth <= 768 && !testimonialsInterval) {
+          testimonialsInterval = setInterval(testimonialsAutoScroll, 2000);
+        }
+      }, 3000); // Resume after 3 seconds
+    });
+  }
+
+  if (startupsContainer) {
+    startupsContainer.addEventListener('touchstart', () => {
+      if (startupsInterval) {
+        clearInterval(startupsInterval);
+        startupsInterval = null;
+      }
+    });
+    
+    startupsContainer.addEventListener('touchend', () => {
+      setTimeout(() => {
+        if (window.innerWidth <= 768 && !startupsInterval) {
+          startupsInterval = setInterval(startupsAutoScroll, 2000);
+        }
+      }, 3000); // Resume after 3 seconds
+    });
+  }
 });
 
 // ============= FACULTY CAROUSEL ===============
@@ -344,6 +465,7 @@ let facultyPositions = {
   "our-faculty": 0,
   "visiting-faculty": 0,
 };
+let facultyAutoScrollInterval = null;
 
 // Make switchTab and moveCarousel global functions for HTML onclick handlers
 window.switchTab = switchTab;
@@ -372,7 +494,10 @@ function switchTab(tabName) {
     targetContainer.classList.remove("hidden");
   }
 
+  // Reset position and restart auto-scroll for the new tab
+  facultyPositions[currentFacultyTab] = 0;
   updateFacultyCarousel();
+  startFacultyAutoScroll();
 }
 
 function moveCarousel(direction) {
@@ -381,6 +506,9 @@ function moveCarousel(direction) {
 
   const cards = carousel.querySelectorAll(".faculty-card");
   const isMobile = window.innerWidth <= 768;
+
+  // Restart auto-scroll timer when user manually interacts
+  startFacultyAutoScroll();
 
   if (isMobile) {
     // On mobile switch to native horizontal scrolling
@@ -403,15 +531,72 @@ function moveCarousel(direction) {
 
   facultyPositions[currentFacultyTab] += direction * cardWidth;
 
-  // Boundary checks
+  // Boundary checks - loop back to start or end
   if (facultyPositions[currentFacultyTab] > 0) {
-    facultyPositions[currentFacultyTab] = 0;
+    // If going right beyond start, jump to the end
+    facultyPositions[currentFacultyTab] = maxPosition;
   }
   if (facultyPositions[currentFacultyTab] < maxPosition) {
-    facultyPositions[currentFacultyTab] = maxPosition;
+    // If going left beyond end, jump to the start
+    facultyPositions[currentFacultyTab] = 0;
   }
 
   updateFacultyCarousel();
+}
+
+function autoScrollFaculty() {
+  const carousel = document.querySelector(`#${currentFacultyTab} .carousel`);
+  if (!carousel) return;
+
+  const cards = carousel.querySelectorAll(".faculty-card");
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // Mobile: use native scrolling
+    const carouselContainer = document.getElementById(currentFacultyTab);
+    if (!carouselContainer) return;
+
+    const scrollAmount = Math.round(carouselContainer.clientWidth * 0.8);
+    const maxScroll = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+    
+    if (carouselContainer.scrollLeft >= maxScroll - 10) {
+      // At the end, jump back to start
+      carouselContainer.scrollTo({
+        left: 0,
+        behavior: "smooth",
+      });
+    } else {
+      // Scroll right
+      carouselContainer.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  } else {
+    // Desktop: transform-based
+    const cardWidth = 420;
+    const visibleCards = 3;
+    const maxPosition = -(cards.length - visibleCards) * cardWidth;
+
+    facultyPositions[currentFacultyTab] -= cardWidth;
+
+    // Loop back to start when reaching the end
+    if (facultyPositions[currentFacultyTab] < maxPosition) {
+      facultyPositions[currentFacultyTab] = 0;
+    }
+
+    updateFacultyCarousel();
+  }
+}
+
+function startFacultyAutoScroll() {
+  // Clear existing interval
+  if (facultyAutoScrollInterval) {
+    clearInterval(facultyAutoScrollInterval);
+  }
+
+  // Start new interval - auto scroll every 2 seconds
+  facultyAutoScrollInterval = setInterval(autoScrollFaculty, 2000);
 }
 
 function updateFacultyCarousel() {
@@ -448,6 +633,8 @@ function updateFacultyCarousel() {
 document.addEventListener("DOMContentLoaded", function () {
   // Ensure the "Our Faculty" tab is active by default
   switchTab("our-faculty");
+  // Start auto-scrolling
+  startFacultyAutoScroll();
 });
 
 window.addEventListener("load", function () {
@@ -458,6 +645,8 @@ window.addEventListener("resize", () => {
   // Reset positions on resize to avoid layout issues
   facultyPositions[currentFacultyTab] = 0;
   updateFacultyCarousel();
+  // Restart auto-scroll after resize
+  startFacultyAutoScroll();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
