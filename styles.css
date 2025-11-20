@@ -3143,7 +3143,7 @@ body {
 
 .professor-section img {
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   /* height: 500px; */
   object-fit: cover;
   border-radius: 20px;
