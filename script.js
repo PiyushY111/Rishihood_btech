@@ -1,3 +1,24 @@
+// Progress Bar Functionality
+function updateProgressBar() {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  
+  const progressBar = document.getElementById('progressBar');
+  if (progressBar) {
+    progressBar.style.width = scrolled + '%';
+  }
+}
+
+// Initialize progress bar on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Add scroll event listener for progress bar
+  window.addEventListener('scroll', updateProgressBar);
+  
+  // Initial call to set progress bar
+  updateProgressBar();
+});
+
 // Programme data with content for each program
 const programmeData = {
   bdesign: {
