@@ -2786,6 +2786,170 @@ body {
   background: #faf8f4;
 }
 
+/* ========== INDUSTRY TOOLS AND MACBOOK SECTION ========== */
+.tools-macbook-section {
+  padding: 80px 40px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tools-macbook-section .section-title {
+  color: #cc0033;
+  text-align: center;
+  margin-bottom: 60px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.tools-macbook-container {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  flex: 1;
+  max-width: 700px;
+}
+
+.tool-card {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  aspect-ratio: 1;
+  min-height: 120px;
+}
+
+.tool-card:hover {
+  border-color: #cc0033;
+  box-shadow: 0 4px 12px rgba(204, 0, 51, 0.1);
+  transform: translateY(-2px);
+}
+
+.tool-card img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.macbook-container {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.macbook-image {
+  width: 450px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.macbook-label {
+  position: absolute;
+  bottom: 20px;
+  background: #cc0033;
+  color: white;
+  padding: 12px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+/* Responsive Design for Tools and MacBook Section */
+@media (max-width: 1200px) {
+  .tools-macbook-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .tools-grid {
+    max-width: 600px;
+  }
+  
+  .macbook-image {
+    width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-macbook-section {
+    padding: 60px 20px;
+  }
+  
+  .tools-macbook-section .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 400px;
+  }
+  
+  .tool-card {
+    padding: 20px 15px;
+    min-height: 100px;
+  }
+  
+  .macbook-image {
+    width: 320px;
+  }
+  
+  .macbook-label {
+    font-size: 0.95rem;
+    padding: 10px 30px;
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tools-macbook-section {
+    padding: 40px 15px;
+  }
+  
+  .tools-macbook-section .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .tools-grid {
+    gap: 10px;
+    max-width: 100%;
+  }
+  
+  .tool-card {
+    padding: 15px 10px;
+    min-height: 80px;
+  }
+  
+  .macbook-image {
+    width: 280px;
+  }
+  
+  .macbook-label {
+    font-size: 0.85rem;
+    padding: 8px 24px;
+    bottom: 10px;
+  }
+}
+
 .trek-description {
   font-size: 24px;
   color: #000000;
