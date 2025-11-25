@@ -3241,8 +3241,8 @@ body {
 
 .professor-section img {
   width: 100%;
-  /* max-width: 1200px; */
-  /* height: 500px; */
+  max-width: 1200px;
+  height: 600px;
   object-fit: cover;
   border-radius: 20px;
   /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); */
