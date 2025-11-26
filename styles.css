@@ -1345,7 +1345,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 60px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .achievement-card {
@@ -2911,6 +2911,7 @@ body {
   .testimonials-container {
     gap: 6px;
     padding: 10px 0px;
+    padding-left: 10px;
   }
 
   .testimonial-card {
@@ -4013,7 +4014,8 @@ font-size: 18px;
 /* ========== HERO SECTION ========== */
 .hero-section {
   margin-top: 62px;
-  background: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/BBB_Landing/assets/hero.webp");
+  /* background: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/BBB_Landing/assets/hero.webp"); */
+  background-image: url(./assets/Btech_hero.png);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
