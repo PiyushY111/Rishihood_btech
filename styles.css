@@ -4041,17 +4041,19 @@ font-size: 18px;
 
 @media (max-width: 768px) {
   .hero-section {
-    background-image: url("./assets/Btech_hero.png");
-    /* background-size: contain; ensure full image is visible */
+    background-image: url("./assets/hero_phone.webp");
+    background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
-    /* background-size: auto; */
   }
   .hero-content {
     justify-content: flex-start;
   }
 }
 @media (max-width: 480px) {
+  .hero-section {
+    background-image: url("./assets/hero_phone.webp");
+  }
   .hero-content {
     background-position: bottom center;
     justify-content: flex-start;
