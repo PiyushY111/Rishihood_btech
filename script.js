@@ -1820,3 +1820,60 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Animated Counter Function for Stats Section
+function animateCounter(element, target, duration = 2000) {
+  const start = 0;
+  const increment = target / (duration / 16); // 60fps
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = element.dataset.originalText;
+      clearInterval(timer);
+    } else {
+      // Extract just the number part for animation
+      const numericValue = Math.floor(current);
+      const suffix = element.dataset.originalText.replace(/[\d]/g, '');
+      element.textContent = numericValue + suffix;
+    }
+  }, 16);
+}
+
+// Intersection Observer for Stats Animation
+document.addEventListener("DOMContentLoaded", function () {
+  const statsSection = document.getElementById("program-experience-section");
+  
+  if (statsSection) {
+    const statNumbers = statsSection.querySelectorAll(".program-stat-number");
+    let hasAnimated = false;
+    
+    // Store original text for each stat
+    statNumbers.forEach(stat => {
+      stat.dataset.originalText = stat.textContent;
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          
+          statNumbers.forEach(stat => {
+            const text = stat.dataset.originalText;
+            const numericValue = parseInt(text.replace(/\D/g, ''));
+            
+            if (!isNaN(numericValue)) {
+              stat.textContent = '0';
+              animateCounter(stat, numericValue, 2000);
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3 // Trigger when 30% of the section is visible
+    });
+    
+    observer.observe(statsSection);
+  }
+});

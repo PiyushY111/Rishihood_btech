@@ -53,7 +53,7 @@
 }
 
 html {
-  zoom: 0.87;
+  zoom: 0.95;
 }
 
 @media (max-width: 768px) {
@@ -3022,13 +3022,13 @@ body {
   background: white;
   border: 2px solid #e0e0e0;
   border-radius: 16px;
-  padding: 24px;
+  /* padding: 24px; */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  min-height: 120px;
+  min-height: 40px;
 }
 
 .internship-companies .company-logo-card:hover {
@@ -3041,12 +3041,13 @@ body {
   max-width: 100%;
   max-height: 60px;
   object-fit: contain;
-  filter: grayscale(1);
+  filter: grayscale(0);
   transition: all 0.3s ease;
 }
 
 .internship-companies .company-logo-card:hover img {
   filter: grayscale(0);
+  transform: scale(1.05);
 }
 
 @media (max-width: 1200px) {
@@ -3138,29 +3139,29 @@ body {
   gap: 60px;
   align-items: center;
   justify-content: center;
-  max-width: 1400px;
+  max-width: 1600px;
   width: 100%;
 }
 
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  flex: 1;
-  max-width: 700px;
+  gap: 16px;
+  flex: 0 0 auto;
+  max-width: 800px;
 }
 
 .tool-card {
   background: #ffffff;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
-  padding: 30px 20px;
+  /* padding: 20px 25px; */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  aspect-ratio: 1;
-  min-height: 120px;
+  height: 90px;
+  width: 100%;
 }
 
 .tool-card:hover {
@@ -3184,7 +3185,7 @@ body {
 }
 
 .macbook-image {
-  width: 450px;
+  width: 380px;
   height: auto;
   object-fit: contain;
   border-radius: 8px;
@@ -3228,14 +3229,14 @@ body {
   }
   
   .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     max-width: 400px;
   }
   
   .tool-card {
     padding: 20px 15px;
-    min-height: 100px;
+    height: 85px;
   }
   
   .macbook-image {
@@ -3266,11 +3267,9 @@ body {
   
   .tool-card {
     padding: 15px 10px;
-    min-height: 80px;
-  }
-  
-  .macbook-image {
-    width: 280px;
+    height: 75px;
+  }  .macbook-image {
+    width: 100%;
   }
   
   .macbook-label {
@@ -3291,7 +3290,7 @@ body {
 }
 
 .trek-image {
-  width: 100%;
+  width: 90%;
   max-width: 1460px;
   padding: 0 24px;
   margin-top: 24px;
