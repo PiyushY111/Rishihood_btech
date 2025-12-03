@@ -142,20 +142,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Startup cards functionality - Click to expand/collapse (disabled on mobile)
+  // Startup cards functionality - Auto-rotate cards and Click to expand/collapse
   const startupCards = document.querySelectorAll(".startup-card");
   const isMobile = () => window.innerWidth <= 768;
+  let currentStartupIndex = 0;
+  let startupAutoRotateInterval = null;
+
+  // Auto-rotate function
+  function rotateStartupCards() {
+    // Remove active class from all cards
+    startupCards.forEach((c) => c.classList.remove("active"));
+    
+    // Move to next card
+    currentStartupIndex = (currentStartupIndex + 1) % startupCards.length;
+    
+    // Add active class to current card
+    if (startupCards[currentStartupIndex]) {
+      startupCards[currentStartupIndex].classList.add("active");
+    }
+  }
+
+  // Start auto-rotation
+  function startStartupAutoRotate() {
+    // Clear existing interval
+    if (startupAutoRotateInterval) {
+      clearInterval(startupAutoRotateInterval);
+    }
+    
+    // Start new interval - rotate every 2 seconds
+    startupAutoRotateInterval = setInterval(rotateStartupCards, 2000);
+  }
+
+  // Stop auto-rotation
+  function stopStartupAutoRotate() {
+    if (startupAutoRotateInterval) {
+      clearInterval(startupAutoRotateInterval);
+      startupAutoRotateInterval = null;
+    }
+  }
 
   startupCards.forEach((card) => {
     card.addEventListener("click", function () {
       // On mobile clicking should do nothing
       if (isMobile()) return;
 
+      // Stop auto-rotation when user clicks
+      stopStartupAutoRotate();
+
       // Remove active class from all cards
       startupCards.forEach((c) => c.classList.remove("active"));
 
       // Add active class to clicked card
       this.classList.add("active");
+      
+      // Update current index
+      currentStartupIndex = Array.from(startupCards).indexOf(this);
+
+      // Resume auto-rotation after 5 seconds
+      setTimeout(startStartupAutoRotate, 5000);
     });
   });
 
@@ -163,10 +207,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateStartupActiveState() {
     if (isMobile()) {
       startupCards.forEach((c) => c.classList.add("active"));
+      stopStartupAutoRotate();
     } else {
       // On desktop, keep first card active by default
       startupCards.forEach((c) => c.classList.remove("active"));
+      currentStartupIndex = 0;
       if (startupCards[0]) startupCards[0].classList.add("active");
+      
+      // Start auto-rotation on desktop
+      startStartupAutoRotate();
     }
   }
   updateStartupActiveState();
@@ -222,35 +271,43 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevArrow = document.querySelector(".prev-arrow");
   const nextArrow = document.querySelector(".next-arrow");
 
-  if (prevArrow && nextArrow && testimonialsContainer) {
-    let currentStartIndex = 0;
-    const visibleCards = 3; // desktop: show 3 cards at a time
-    const totalCards = testimonialCards.length;
+  // Make these variables accessible for auto-scroll
+  let currentStartIndex = 0;
+  const visibleCards = 3; // desktop: show 3 cards at a time
+  const totalCards = testimonialCards.length;
 
-    // Desktop carousel behavior (hide/show cards)
-    function updateCarousel() {
-      // Hide all cards first
-      testimonialCards.forEach((card, index) => {
-        if (
-          index >= currentStartIndex &&
-          index < currentStartIndex + visibleCards
-        ) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      // Activate the first visible card
-      testimonialCards.forEach((c) => c.classList.remove("active"));
-      if (testimonialCards[currentStartIndex]) {
-        testimonialCards[currentStartIndex].classList.add("active");
+  // Desktop carousel behavior (hide/show cards)
+  function updateCarousel() {
+    // Show cards based on what fits on screen
+    testimonialCards.forEach((card, index) => {
+      // Calculate which cards should be visible
+      let shouldShow = false;
+      
+      if (currentStartIndex + visibleCards <= totalCards) {
+        // Normal case - show visibleCards starting from currentStartIndex
+        shouldShow = index >= currentStartIndex && index < currentStartIndex + visibleCards;
+      } else {
+        // Wrap around case - show remaining cards from end + cards from beginning
+        const remainingCards = totalCards - currentStartIndex;
+        const cardsFromStart = visibleCards - remainingCards;
+        shouldShow = index >= currentStartIndex || index < cardsFromStart;
       }
+      
+      card.style.display = shouldShow ? "flex" : "none";
+    });
 
-      // Update arrow states
-      prevArrow.disabled = currentStartIndex === 0;
-      nextArrow.disabled = currentStartIndex >= totalCards - visibleCards;
+    // Activate the first visible card
+    testimonialCards.forEach((c) => c.classList.remove("active"));
+    if (testimonialCards[currentStartIndex]) {
+      testimonialCards[currentStartIndex].classList.add("active");
     }
+
+    // Update arrow states
+    if (prevArrow) prevArrow.disabled = false;
+    if (nextArrow) nextArrow.disabled = false;
+  }
+
+  if (prevArrow && nextArrow && testimonialsContainer) {
 
     // Mobile scroll behavior
     const mobileScrollAmount = () =>
@@ -265,21 +322,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handlers for desktop
     function desktopNext() {
-      if (currentStartIndex < totalCards - visibleCards) {
-        currentStartIndex++;
-        updateCarousel();
-        nextArrow.classList.add("active");
-        setTimeout(() => nextArrow.classList.remove("active"), 200);
+      currentStartIndex++;
+      if (currentStartIndex >= totalCards) {
+        currentStartIndex = 0;
       }
+      updateCarousel();
+      nextArrow.classList.add("active");
+      setTimeout(() => nextArrow.classList.remove("active"), 200);
     }
 
     function desktopPrev() {
-      if (currentStartIndex > 0) {
-        currentStartIndex--;
-        updateCarousel();
-        prevArrow.classList.add("active");
-        setTimeout(() => prevArrow.classList.remove("active"), 200);
+      currentStartIndex--;
+      if (currentStartIndex < 0) {
+        currentStartIndex = totalCards - 1;
       }
+      updateCarousel();
+      prevArrow.classList.add("active");
+      setTimeout(() => prevArrow.classList.remove("active"), 200);
     }
 
     // Handlers for mobile
@@ -382,6 +441,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  // Auto-scroll for Testimonials on desktop
+  const testimonialsAutoScrollDesktop = () => {
+    if (window.innerWidth > 768 && testimonialCards && testimonialCards.length > 0) {
+      // Move to next set of cards - cycle through all positions
+      currentStartIndex++;
+      if (currentStartIndex >= totalCards) {
+        // Loop back to start
+        currentStartIndex = 0;
+      }
+      if (typeof updateCarousel === 'function') {
+        updateCarousel();
+      }
+    }
+  };
+
   // Auto-scroll for Student Startups on mobile
   const startupsContainer = document.querySelector('.startups-container');
   const startupsAutoScroll = () => {
@@ -411,16 +485,18 @@ document.addEventListener("DOMContentLoaded", function () {
   let startupsInterval = null;
 
   const startAutoScroll = () => {
-    if (window.innerWidth <= 768) {
-      // Start testimonials auto-scroll
-      if (testimonialsContainer && !testimonialsInterval) {
+    // Start testimonials auto-scroll for both mobile and desktop
+    if (testimonialsContainer && !testimonialsInterval) {
+      if (window.innerWidth <= 768) {
         testimonialsInterval = setInterval(testimonialsAutoScroll, 2000);
+      } else {
+        testimonialsInterval = setInterval(testimonialsAutoScrollDesktop, 2000);
       }
-      
-      // Start startups auto-scroll
-      if (startupsContainer && !startupsInterval) {
-        startupsInterval = setInterval(startupsAutoScroll, 2000);
-      }
+    }
+    
+    // Start startups auto-scroll (mobile only)
+    if (window.innerWidth <= 768 && startupsContainer && !startupsInterval) {
+      startupsInterval = setInterval(startupsAutoScroll, 2000);
     }
   };
 
@@ -455,10 +531,61 @@ document.addEventListener("DOMContentLoaded", function () {
     
     testimonialsContainer.addEventListener('touchend', () => {
       setTimeout(() => {
-        if (window.innerWidth <= 768 && !testimonialsInterval) {
-          testimonialsInterval = setInterval(testimonialsAutoScroll, 2000);
+        if (!testimonialsInterval) {
+          if (window.innerWidth <= 768) {
+            testimonialsInterval = setInterval(testimonialsAutoScroll, 2000);
+          } else {
+            testimonialsInterval = setInterval(testimonialsAutoScrollDesktop, 2000);
+          }
         }
       }, 3000); // Resume after 3 seconds
+    });
+  }
+
+  // Also pause on desktop when clicking arrows
+  if (prevArrow) {
+    const originalPrevHandler = prevArrow.onclick;
+    prevArrow.addEventListener('click', () => {
+      if (testimonialsInterval) {
+        clearInterval(testimonialsInterval);
+        testimonialsInterval = null;
+      }
+      setTimeout(() => {
+        if (!testimonialsInterval && window.innerWidth > 768) {
+          testimonialsInterval = setInterval(testimonialsAutoScrollDesktop, 2000);
+        }
+      }, 5000); // Resume after 5 seconds on desktop
+    }, true);
+  }
+
+  if (nextArrow) {
+    const originalNextHandler = nextArrow.onclick;
+    nextArrow.addEventListener('click', () => {
+      if (testimonialsInterval) {
+        clearInterval(testimonialsInterval);
+        testimonialsInterval = null;
+      }
+      setTimeout(() => {
+        if (!testimonialsInterval && window.innerWidth > 768) {
+          testimonialsInterval = setInterval(testimonialsAutoScrollDesktop, 2000);
+        }
+      }, 5000); // Resume after 5 seconds on desktop
+    }, true);
+  }
+
+  // Pause on hover (desktop only)
+  if (testimonialsContainer) {
+    testimonialsContainer.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 768 && testimonialsInterval) {
+        clearInterval(testimonialsInterval);
+        testimonialsInterval = null;
+      }
+    });
+    
+    testimonialsContainer.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 768 && !testimonialsInterval) {
+        testimonialsInterval = setInterval(testimonialsAutoScrollDesktop, 2000);
+      }
     });
   }
 
@@ -1359,42 +1486,6 @@ function throttle(func, limit) {
   };
 }
 
-// Startup cards functionality - Click to expand/collapse (disabled on mobile)
-const startupCards = document.querySelectorAll(".startup-card");
-const isMobile = () => window.innerWidth <= 768;
-
-startupCards.forEach((card) => {
-  card.addEventListener("click", function () {
-    // On mobile clicking should do nothing
-    if (isMobile()) return;
-
-    // Remove active class from all cards
-    startupCards.forEach((c) => c.classList.remove("active"));
-
-    // Add active class to clicked card
-    this.classList.add("active");
-  });
-});
-
-// Ensure all startup cards are active on mobile (so clicking doesn't change anything)
-function updateStartupActiveState() {
-  if (isMobile()) {
-    startupCards.forEach((c) => c.classList.add("active"));
-  } else {
-    // On desktop, keep first card active by default
-    startupCards.forEach((c) => c.classList.remove("active"));
-    if (startupCards[0]) startupCards[0].classList.add("active");
-  }
-}
-updateStartupActiveState();
-
-// Re-apply when resizing
-window.addEventListener("resize", () => {
-  // debounce
-  clearTimeout(window._startupResizeTimer);
-  window._startupResizeTimer = setTimeout(updateStartupActiveState, 150);
-});
-
 // Testimonial cards functionality - Click to expand/collapse
 const testimonialCards = document.querySelectorAll(".testimonial-card");
 const testimonialsContainer = document.querySelector(".testimonials-container");
@@ -1835,7 +1926,7 @@ function animateCounter(element, target, duration = 2000) {
     } else {
       // Extract just the number part for animation
       const numericValue = Math.floor(current);
-      const suffix = element.dataset.originalText.replace(/[\d]/g, '');
+      const suffix = element.dataset.originalText.replace(/[0-9]/g, '');
       element.textContent = numericValue + suffix;
     }
   }, 16);
