@@ -4102,7 +4102,7 @@ font-size: 18px;
 .hero-section {
   margin-top: 62px;
   /* background: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/BBB_Landing/assets/hero.webp"); */
-  background-image: url(./assets/Btech_hero.png);
+  background-image: url(https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/btech_LP/assets/Btech_hero.webp);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -4128,7 +4128,7 @@ font-size: 18px;
 
 @media (max-width: 768px) {
   .hero-section {
-    background-image: url("./assets/hero_phone.webp");
+    background-image: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/btech_LP/assets/hero_phone.webp");
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
@@ -4139,7 +4139,7 @@ font-size: 18px;
 }
 @media (max-width: 480px) {
   .hero-section {
-    background-image: url("./assets/hero_phone.webp");
+    background-image: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/btech_LP/assets/hero_phone.webp");
   }
   .hero-content {
     background-position: bottom center;
@@ -4281,7 +4281,7 @@ font-size: 18px;
 
 @media (min-width: 1024px) {
   .hero-section {
-    background: url("./assets/Btech_hero.png");
+    background: url("https://rishihoodmarketingimg.s3.ap-south-1.amazonaws.com/btech_LP/assets/Btech_hero.webp");
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
